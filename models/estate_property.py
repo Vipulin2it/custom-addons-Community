@@ -4,9 +4,10 @@ from odoo import models , fields
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Real estate Property"
-    
-    postcode = fields.Integer(string="Postcode" ,required=True , help="Postal area" , size =5)
-    date_available = fields.Date(string="Availabel From")
+
+    name = fields.Char(string="Property Name", required=True, size=50)
+    postcode = fields.Integer(string="Postcode", required=True, help="Postal area", size=5)
+    date_available = fields.Date(string="Available From")
     expected_price = fields.Float(string='Expected Price')
     selling_price = fields.Float(string='Selling Price' )
     
@@ -36,6 +37,15 @@ class EstateProperty(models.Model):
 
     def create_button(self):
         pass
+
+    def action_send_msg(self):
+        return {
+            'name': 'Property Enquiry',
+            'type': 'ir.actions.act_window',
+            'res_model': 'properties.enquiry.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+        }
     
 
 

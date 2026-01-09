@@ -1,0 +1,4 @@
+__pycache__/
+controllers/
+security/
+odoo17env/

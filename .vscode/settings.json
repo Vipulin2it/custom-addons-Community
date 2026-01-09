@@ -1,0 +1,5 @@
+{
+  "python.analysis.extraPaths": [
+    "/home/in2it/Desktop/workspace/community/odoo17/odoo"
+  ]
+}

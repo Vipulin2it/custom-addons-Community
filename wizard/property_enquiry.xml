@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="wizard_form_property_enquiry" model="ir.ui.view">
+        <field name="name">property.enquiry.wizard.form</field>
+        <field name="model">properties.enquiry.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Property Enquiry">
+                <group>
+                    <field name="property_type" widget="many2many_tags"/>
+                    <field name="person_name"/>
+                    <field name="person_email"/>
+                    <field name="contact_number"/>
+                    <field name="enquiry_message"/>
+                </group>
+                <footer>
+                    <button string="Send Enquiry" type="object" name="action_send_enquiry" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    
+    </record>
+
+
+
+
+
+
+
+
+
+
+
+</odoo>

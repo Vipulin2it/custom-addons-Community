@@ -8,8 +8,8 @@
     "data": [
         "security/ir.model.access.csv",
         "views/estate_property.xml",
-        "views/owner.xml"
-
+        "views/owner.xml",
+        "wizard/property_enquiry.xml",
     ],
     "installable": True,
     "application": True,

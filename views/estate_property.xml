@@ -10,7 +10,9 @@
             <header>
                     <button name="edit_button" string="Edit" type='object' class="oe_highlight" display="always"/>
                     <button name="create_button" string="Create" type='object' class="oe_highlight" display="always"/>
+                   <button name="action_send_msg" string="Enquiry" type="object" class="oe_stat_button" />
             </header>
+                <field name="name"/>
                 <field name="postcode"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
@@ -40,6 +42,7 @@
                     
                     <group>
                         <group>
+                        <field name="name"/>
                         <field name="postcode"/>
                         <field name="date_available"/>
                         <!-- <field name="name"/> -->
