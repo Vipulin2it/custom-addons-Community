@@ -104,6 +104,8 @@
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="owner_id"/>
+                <field name="owner_contact"/>
                 <field name="person_gender"/>
                 <field name="price"/>
                 
@@ -126,6 +128,8 @@
                 <sheet>
                     <group>
                         <group>
+                        <field name="owner_id"/>
+                        <field name="owner_contact"/>
                         <field name="image_file"/>
                         <field name="currency" widget="monetary"/>
                         <field name="price"/>

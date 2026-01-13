@@ -1,4 +1,3 @@
-
 from odoo import fields, models , api
 from datetime import date
 
@@ -16,6 +15,7 @@ class Owner(models.Model):
     contact_info = fields.Integer(string="Contact Info")
     date_of_birth = fields.Datetime(string="Date of Birth")
     age = fields.Integer(string="Age", compute='_compute_age', inverse='_inverse_age', tracking=True ,store=True) 
+    
 
     shared_property_ids = fields.Many2many(
         'estate.property',
@@ -36,7 +36,6 @@ class Owner(models.Model):
             else:
                 rec.age = 0
 
-    @api.depends('age')
     def _inverse_age(self):
         for rec in self:
             today= date.today()
@@ -48,3 +47,16 @@ class Owner(models.Model):
     def _compute_display_name(self):
         for rec in self:
             rec.display_name = f"{rec.name}  {rec.contact_info}"
+    
+
+    @api.model_create_multi
+    def create(self, values):
+        rec = super(Owner, self).create(values)
+        print(f"------------------------------Record Created: {rec , values}*************------------------------")
+        return rec
+    
+
+
+    def custom_button(self):
+        data = {'name': 'Button clicked!'}
+        self.env['owner'].create(data)
