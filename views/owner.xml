@@ -11,7 +11,9 @@
             <!-- <button name="search_records" string="Search Records" type="object" class="oe_highlight" display="always"/>
             <button name="count_record" string="Search Count" type="object" class="oe_highlight" display="always"/> -->
             <button name="read_button" string="Read Records" type="object" class="oe_highlight" display="always"/>
-            
+            <button name="button_filtered_record" string="Filtered Records" type="object" class="oe_highlight" display="always"/>
+            <button name="button_sorted_record" string="Sorted Records" type="object" class="oe_highlight" display="always"/>
+            <button name="button_grouped_record" string="Grouped Records" type="object" class="oe_highlight" display="always"/>
             </header>
                 <field name="serial_no"/>
                 <field name="id"/>

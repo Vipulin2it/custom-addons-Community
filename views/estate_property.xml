@@ -40,6 +40,7 @@
                 <header>
                     <button name="edit_button" string="Edit" type='object' class="oe_highlight" display="always"/>
                     <button name="create_button" string="Create" type='object' class="oe_highlight" display="always"/>
+                    <button name="button_field_get" string="button_field_get" type='object' class="oe_highlight" display="always"/>
                 </header>
                 <sheet>
                     <h1 style="">New House</h1>

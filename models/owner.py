@@ -166,11 +166,27 @@ class Owner(models.Model):
         return self._search(domain, limit=limit, order=order , )
        
 
+    
+    def button_filtered_record(self):
+        rec =self.env['owner'].search([]) 
+        filtered_rec = rec.filtered(lambda r : 'vip' in str(r.name)).mapped(lambda r: (r.id, r.name))
+
+        print(f"------------------------------Filtered Records: {filtered_rec}*************------------------------")
+
+
+    def button_sorted_record(self):
+        rec = self.env['owner'].search([])
+        soreted_rec = rec.sorted(key = lambda r: r.age, reverse = True).mapped('name')
+        print(f"------------------------------Sorted Records: {soreted_rec}*************------------------------")
+
+    def button_grouped_record(self):
+        rec = self.env['owner'].search([])
+        grouped_rec = rec.grouped(key ='gender')
+        print(f"------------------------------Grouped Records: {grouped_rec}*************------------------------")
+        for ky in grouped_rec:
+            print(f" ------------------------------Key: {ky} , Values: {grouped_rec[ky]}*************------------------------")
 
 
 
 
-
-
-
-
+   

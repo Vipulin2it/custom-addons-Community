@@ -101,6 +101,17 @@ class EstateProperty(models.Model):
             rec.display_name = f"{rec.name}  {rec.postcode}"
 
 
+    def button_field_get(self , allfields = None , attributes = None ):
+
+        fields_info =self.env['estate.property']
+        fields_data  =  fields_info.fields_get(attributes=attributes , allfields=allfields )
+        fields_data['description']['default'] = 'this is a custom description'
+        fields_data['bedrooms']['placeholder'] = 'this is a custom placeholder '
+        print(f"------------------------------Fields Data: {fields_data}*************------------------------")
+        return fields_data
+
+
+
 
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
