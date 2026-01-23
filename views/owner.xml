@@ -15,7 +15,7 @@
             <button name="button_sorted_record" string="Sorted Records" type="object" class="oe_highlight" display="always"/>
             <button name="button_grouped_record" string="Grouped Records" type="object" class="oe_highlight" display="always"/>
             </header>
-                <field name="serial_no"/>
+                <!-- <field name="serial_no"/> -->
                 <field name="id"/>
                 <field name="child_ids"/>
                 <field name="parent_id"/>
@@ -26,6 +26,7 @@
                 <field name="shared_property_ids"/>
                 <field name="reference_field"/>
                 <field name="gender"/>
+                <field name="active" widget="boolean_toggle"/>
             </tree>
         
         </field>
@@ -53,15 +54,17 @@
                                 <field name="date_of_birth"/>
                                 <field name="age"/>
                                 <field name="gender"/>
+                                <field name="active" widget="boolean_toggle"/>
                             </group>
                         </page>
                         <page string="Property Info" class="oe_highlight">
                             <group>
+                               
                                 <field name="parent_id"/>
                                 <field name="child_ids"/>
                                 <field name="shared_property_ids"/>
-
                                 <field name="reference_field"/>
+                             
                             </group>
                         </page>
                     </notebook>

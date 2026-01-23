@@ -1,5 +1,7 @@
 from odoo import fields, models , api
 from datetime import date
+from odoo.exceptions import ValidationError
+
 
 class Owner(models.Model):
     _name = "owner"
@@ -7,10 +9,10 @@ class Owner(models.Model):
     
 
 
-    serial_no = fields.Integer(
-    string="S.No.",
-    compute="_compute_serial_no",
-    store=False)
+    # serial_no = fields.Integer(
+    # string="S.No.",
+    # compute="_compute_serial_no",
+    # store=False)
 
 
     parent_id = fields.Many2one(
@@ -43,16 +45,36 @@ class Owner(models.Model):
         'property_id',
         string="Shared Properties"
     )
+    active = fields.Boolean(string="Active Owner")
 
     reference_field = fields.Reference(selection=[('estate.property', 'Property')],string="Property Postcode Id")
 
+    # _sql_constraints = [
+    # ('owner_active_check', 'CHECK(active IS FALSE OR (active IS TRUE AND name UNIQUE))', 'Error message')]
 
-    def _compute_serial_no(self):
-            serial = 1
-            records = self.search([], order='id')
-            for rec in records:
-                rec.serial_no = serial
-                serial += 1
+
+
+
+
+
+
+    # @api.constrains('name','age' )
+    # def _check_name(self):
+    #     for rec in self:
+    #         if rec.name:
+    #             if (len(rec.name)<6 and rec.age <=16):
+    #                 raise  ValidationError("Owner name must be at least 6 characters long and age must be at least 16 years.")
+
+
+
+
+
+    # def _compute_serial_no(self):
+    #         serial = 1
+    #         records = self.search([], order='id')
+    #         for rec in records:
+    #             rec.serial_no = serial
+    #             serial += 1
 
     @api.depends('date_of_birth')
     def _compute_age(self):

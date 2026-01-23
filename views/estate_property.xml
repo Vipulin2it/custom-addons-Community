@@ -25,7 +25,7 @@
                 <field name="garage" widget="boolean"/>
                 <field name="garden" widget="boolean_toggle"/>
                 <field name="garden_message"/>
-                <field name="owners_list"/>
+                <field name="owners_list"  widget="many2one_tags"/>
                 <field name="shared_owner_ids"/>
             </tree>
         </field>
@@ -71,7 +71,7 @@
                         </page>
                         <page string="Owner_list">
                             <group>
-                                <field name="owners_list"/>  
+                                <field name="owners_list" />  
                                 <field name="shared_owner_ids"/>
                             </group> 
                         </page>
