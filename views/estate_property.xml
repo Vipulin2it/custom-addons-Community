@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
     <!-- Tree View -->
     <record id="view_estate_property_tree" model="ir.ui.view">
         <field name="name">estate.property.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <tree>
-            <header>
+                <header>
                     <button name="edit_button" string="Edit" type='object' class="oe_highlight" display="always"/>
                     <button name="create_button" string="Create" type='object' class="oe_highlight" display="always"/>
-                   <button name="action_send_msg" string="Enquiry" type="object" class="oe_stat_button" display="always"/>
-
-                   
-            </header>
-
+                    <button name="action_send_msg" string="Enquiry" type="object" class="oe_stat_button" display="always"/>
+                </header>
                 <field name="company_id"/>
                 <field name="id"/>
                 <field name="user_id"/>
@@ -33,7 +29,6 @@
             </tree>
         </field>
     </record>
-
     <!-- Form View -->
     <record id="view_estate_property_form" model="ir.ui.view">
         <field name="name">estate.property.form</field>
@@ -48,21 +43,19 @@
                 <sheet>
                     <h1 style="">New House</h1>
                     <field name="company_id"/>
-                    
                     <group>
                         <group>
-                        <field name="user_id"/>
-                        <field name="name"/>
-                        <field name="postcode"/>
-                        <field name="date_available"/>
-                        <!-- <field name="name"/> -->
+                            <field name="user_id"/>
+                            <field name="name"/>
+                            <field name="postcode"/>
+                            <field name="date_available"/>
+                            <!-- <field name="name"/> -->
                         </group>
                         <group>
                             <field name="expected_price"/>
                             <field name="selling_price"/>
                         </group>
                     </group>
-
                     <notebook>
                         <page string="Description" class="oe_highlight">
                             <group>
@@ -76,56 +69,42 @@
                         </page>
                         <page string="Owner_list">
                             <group>
-                                <field name="owners_list" />  
+                                <field name="owners_list" />
                                 <field name="shared_owner_ids"/>
-                            </group> 
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
             </form>
         </field>
     </record>
-
     <!-- Action -->
     <record id="action_estate_property" model="ir.actions.act_window">
         <field name="name">Properties</field>
         <field name="res_model">estate.property</field>
         <field name="view_mode">tree,kanban,form</field>
     </record>
-
     <!-- Menu -->
     <menuitem id="menu_estate_root" name="Estate"/>
-
     <menuitem
         id="menu_estate_property"
         name="Properties"
         parent="menu_estate_root"
         action="action_estate_property"/>
-
-
-
-
-
-
-
-
-     <!-- treeview  -->
+    <!-- treeview  -->
     <record id="estate_property__offer_tree_view" model='ir.ui.view'>
         <field name="name">estate.property.offer.tree</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
             <tree>
-
-            <header>
-                <button name="reads_grouping" string="Group Read" type="object" class="oe_highlight" display="always"/>
-                <button name="read_search_read" string="Search Read" type="object" class="oe_highlight" display="always"/>
-                
-            </header>
+                <header>
+                    <button name="reads_grouping" string="Group Read" type="object" class="oe_highlight" display="always"/>
+                    <button name="read_search_read" string="Search Read" type="object" class="oe_highlight" display="always"/>
+                </header>
                 <field name="owner_id"/>
                 <field name="owner_contact"/>
                 <field name="person_gender" decoration-danger="person_gender == 'male'" decoration-success="person_gender == 'female'"/>
                 <field name="price"/>
-                
                 <field name="binary_file"/>
                 <field name="html_file"/>
                 <field name="image_file"/>
@@ -136,45 +115,34 @@
     </record>
 
 
-     form view 
+     form view
     <record id="estate_property_offer_form_view" model="ir.ui.view">
         <field name="name">estate.propert.offer.form</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
             <form string="Offer">
-               
                 <sheet>
                     <group>
                         <group>
-                        <field name="owner_id"/>
-                        <field name="owner_contact"/>
-                        <field name="image_file"/>
-                        <field name="currency" widget="monetary"/>
-                        <field name="price"/>
-                        <field name="person_gender"/>
-                        
-                        
+                            <field name="owner_id"/>
+                            <field name="owner_contact"/>
+                            <field name="image_file"/>
+                            <field name="currency" widget="monetary"/>
+                            <field name="price"/>
+                            <field name="person_gender"/>
                         </group>
-
                         <group>
-                        
-                        <field name="binary_file"/>
-                        <field name="html_file"/>
-                        <field name="deadline_date"/>
-                        <button name="action_test" string="Test Object button" type="object" class="oe_highlight"/>
-                        <button name="%(mycompany_custom.action_owner)d" type="action" string="test_action_button" class="oe_highlight"/>
-
+                            <field name="binary_file"/>
+                            <field name="html_file"/>
+                            <field name="deadline_date"/>
+                            <button name="action_test" string="Test Object button" type="object" class="oe_highlight"/>
+                            <button name="%(mycompany_custom.action_owner)d" type="action" string="test_action_button" class="oe_highlight"/>
                         </group>
-
                     </group>
-                    
                 </sheet>
             </form>
         </field>
     </record>
-
-
-
     <record id="search_view_estate_property_offer" model="ir.ui.view">
         <field name="name">estate.property.offer.search</field>
         <field name="model">estate.property.offer</field>
@@ -192,17 +160,13 @@
             </search>
         </field>
     </record>
-
-
-     <!-- actions  -->
-
-    <record id="actions_estate_property_offer" model="ir.actions.act_window"> 
+    <!-- actions  -->
+    <record id="actions_estate_property_offer" model="ir.actions.act_window">
         <field name="name">Offers</field>
         <field name="res_model">estate.property.offer</field>
         <field name="view_mode">tree,form,search,kanban</field>
         <!-- <field name="view_id" ref="estate_property__offer_tree_view"/> -->
         <!-- <field name="context">{'group_by':'owner_id'}</field> -->
-        
     </record>
 
      menu item
@@ -211,9 +175,7 @@
         name="Offers"
         parent="menu_estate_root"
         action="actions_estate_property_offer"
-    /> 
-
-
+    />
     <!-- #inherit the sale order to add postcode field   
 
     <record id="view_sale_order_form_inherit_postcode" model="ir.ui.view">
@@ -226,7 +188,4 @@
         </xpath>
     </field>
     </record> -->
-
-
 </odoo>
-

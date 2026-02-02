@@ -12,7 +12,8 @@
         "views/enquiry.xml",
         # "security/groups.xml",
         "wizard/property_enquiry.xml",
-        "report/qweb_report.xml"
+        "report/qweb_report.xml",
+        "report/qweb_inherit.xml",
 
     ],
     "installable": True,

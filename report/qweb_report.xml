@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <odoo>
-    
     <!-- <template id="estate_property_report_template">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
@@ -14,12 +12,11 @@
                      </t>
                 </t>
             </t> -->
-        <template id="estate_property_report_template">
-            <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="doc">
-
-                    <t t-call="mycompany_custom.sub_template_estate_property">
-                        <!-- <div class="page">
+    <template id="estate_property_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="mycompany_custom.sub_template_estate_property">
+                    <!-- <div class="page">
                              <h1>Hello How are you ?</h1>
                             <t t-set="a" t-value="45545"/>
                             <div t-out="a"/>
@@ -28,55 +25,66 @@
                             <div t-field="doc.postcode"/>
                             <div t-field="doc.expected_price"/>
                             <div t-field="doc.selling_price"/> -->
-
-
-                            <!-- <t t-if="doc.name == 'amarpali'">
+                    <!-- <t t-if="doc.name == 'amarpali'">
                                 <h1>Welcome Amarpali</h1>
                             </t>
                             <t t-else="">
                                 <h1>Welcome <span t-field="doc.name"/> Guest</h1>
                             </t> -->
-
-
-                            <!-- <t t-foreach="doc.shared_owner_ids" t-as="char">
+                    <!-- <t t-foreach="doc.shared_owner_ids" t-as="char">
                                 <div>
                                  
                                     Welcome <span t-field="char.user_id"/>
                                 </div>
                             </t> 
                         </div> -->
-                    </t>
                 </t>
             </t>
-        </template>
+        </t>
+    </template>
+    <template id="sub_template_estate_property">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h1>Sub Template</h1>
+                <h1 t-field="doc.name"/>
+                <!-- 
+                    <t t-foreach="doc.shared_owner_ids" t-as="user">
+                        <div>
+                            <a t-att-href="'mailto:%s' % user.name">
+                                <span t-field="user.name"/>
+                            </a>
+                        </div>
 
-
-        <template id = "sub_template_estate_property">
-            <t t-call="web.external_layout">
-             
-                    <div class="page">
-                        <h1>Sub Template</h1>
-                        <h1 t-field="doc.name"/>
-                        <a href="www.google.com">Google</a>
-                        
-                    </div>
-            </t>
-        </template>
-
-
-
-
-            <record id="estate_property_report_action" model="ir.actions.report">
-                <field name="name">Property card</field>
-                <field name="model">estate.property</field>
-                <field name="report_type">qweb-pdf</field>
-                <field name="report_name">mycompany_custom.estate_property_report_template</field>
-                <field name="report_file">mycompany_custom.estate_property_report_template</field>
-                <field name="binding_model_id" ref="mycompany_custom.model_estate_property"/> 
-                <field name="binding_type">report</field>
-            </record>
+                    </t> -->
+            </div>
+        </t>
+    </template>
 
 
 
+    <record id="estate_model_report_paperformat" model="report.paperformat">
+        <field name="name">Estate Property Report</field>
+        <!-- <field name="format">A4</field> -->
+        <field name="orientation">Portrait</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        
+        <field name="dpi">90</field>
+    </record>
 
+
+    <record id="estate_property_report_action" model="ir.actions.report">
+        <field name="name">Property card</field>
+        <field name="model">estate.property</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mycompany_custom.estate_property_report_template</field>
+        <field name="report_file">mycompany_custom.estate_property_report_template</field>
+        <field name="binding_model_id" ref="mycompany_custom.model_estate_property"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="estate_model_report_paperformat"/>
+    </record>
 </odoo>
