@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_pdf_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page" style="font-size:22px; line-height:1.1; padding:5; margin:5;">
+                        <h2 style="margin:0; padding:0;">
+                            Property Owner :
+                            <t t-out="doc.user_id.name"/>
+                        </h2>
+                        <div style="margin:0; padding:0;">
+                            Property Name :
+                            <t t-out="doc.name"/>
+                        </div>
+                        <div style="margin:0; padding:0;">
+                            Postcode :
+                            <t t-out="doc.postcode"/>
+                        </div>
+                        <div style="margin:0; padding:0;">
+                            Expected Price :
+                            <t t-out="doc.expected_price"/>
+                        </div>
+                        <div style="margin:0; padding:0;">
+                            Status :
+                            <t t-if="doc.selling_price &gt; 0">Sold</t>
+                            <t t-elif="doc.selling_price == 0">Available</t>
+                            <t t-else="">Not Sold</t>
+                        </div>
+                        
+                        <table style="
+                            width:100%;
+                            border-collapse:collapse;
+                            margin-top:2px;
+                            font-size:22px;
+                        ">
+                            <tr>
+                                <th style="border:1px solid black; padding:1px;">Selling Price</th>
+                                <th style="border:1px solid black; padding:1px;">Primary owner</th>
+                                <th style="border:1px solid black; padding:1px;">Shared owner</th>
+                                <th style="border:1px solid black; padding:1px;">Available From</th>
+                            </tr>
+                            <tr>
+                                <td style="border:1px solid black; padding:1px;">
+                                    <t t-out="doc.selling_price"/>
+                                </td>
+                                <td style="border:1px solid black; padding:1px;">
+                                    <t t-foreach="doc.owners_list" t-as="owner">
+                                        <t t-out="owner.name"/>
+                                        <br/>
+                                    </t>
+                                </td>
+                                <td style="border:1px solid black; padding:1px;">
+                                    <t t-foreach="doc.shared_owner_ids" t-as="shared">
+                                        <t t-out="shared.name"/>
+                                        <br/>
+                                    </t>
+                                </td>
+                                <td style="border:1px solid black; padding:1px;">
+                                    <t t-out="doc.date_available"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="action_report-custom_pdf" model="ir.actions.report">
+        <field name="name">Property Enquiry</field>
+        <field name="model">estate.property</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mycompany_custom.custom_pdf_report</field>
+        <field name="report_file">mycompany_custom.custom_pdf_report</field>
+        <field name="binding_model_id" ref="mycompany_custom.model_estate_property"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
