@@ -4,69 +4,122 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.external_layout">
-                    <div class="page" style="font-size:22px; line-height:1.1; padding:5; margin:5;">
-                        <h2 style="margin:0; padding:0;">
-                            Property Owner :
-                            <t t-out="doc.user_id.name"/>
+
+                    <div class="page"
+                         style="font-size:18px; line-height:1.6; padding:20px;">
+
+                        <!-- Title -->
+                        <h2 style="margin-bottom:20px;">
+                            Property Details
                         </h2>
-                        <div style="margin:0; padding:0;">
-                            Property Name :
-                            <t t-out="doc.name"/>
+
+                    
+                        <div style="width:100%; margin-bottom:20px;">
+
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr>
+
+                                    <!-- LEFT : Property Info -->
+                                    <td style="width:75%; vertical-align:top;">
+
+                                        <div style="margin-bottom:12px;">
+                                            <strong>Property Owner:</strong>
+                                            <span t-out="doc.user_id.name"/>
+                                        </div>
+
+                                        <div style="margin-bottom:12px;">
+                                            <strong>Property Name:</strong>
+                                            <span t-out="doc.name"/>
+                                        </div>
+
+                                        <div style="margin-bottom:12px;">
+                                            <strong>Postcode:</strong>
+                                            <span t-out="doc.postcode"/>
+                                        </div>
+
+                                        <div style="margin-bottom:12px;">
+                                            <strong>Expected Price:</strong>
+                                            <span t-out="doc.expected_price"/>
+                                        </div>
+
+                                        <div style="margin-bottom:12px;">
+                                            <strong>Status:</strong>
+                                            <t t-if="doc.selling_price &gt; 0">Sold</t>
+                                            <t t-elif="doc.selling_price == 0">Available</t>
+                                            <t t-else="">Not Sold</t>
+                                        </div>
+
+                                    </td>
+<!-- 
+                                    <td style=style="width:25%; vertical-align:top; text-align:right;">
+                                        <img src="" alt="Image is Not Load..."/> 
+                                    </td> -->
+
+                           
+                                    <td style="width:25%; vertical-align:top; text-align:right;">
+
+                                        <img t-attf-src="/report/barcode/QR/{{doc.name}}?&amp;width=100&amp;height=100&amp;quiet=0"
+                                             width="150"
+                                             height="150"
+                                             style="margin-top:32px;"
+                                             alt="QR Code"/>
+                                        
+                                        <!-- <img t-attf-src="/report/barcode/QR/{{ doc.name }}?width=100&amp;height=100" style="width:100px; height:100px;" alt="QR Code"/> -->
+                                        <!-- <div t-field="doc.user_id.name"
+                                                t-options="{'widget':'barcode','symbology':'QR','width':100,'height':100 , 'img_style':'width:50px;height:70px;'}">
+                                        </div> -->
+
+                                    </td>
+
+                                </tr>
+                            </table>
+
                         </div>
-                        <div style="margin:0; padding:0;">
-                            Postcode :
-                            <t t-out="doc.postcode"/>
-                        </div>
-                        <div style="margin:0; padding:0;">
-                            Expected Price :
-                            <t t-out="doc.expected_price"/>
-                        </div>
-                        <div style="margin:0; padding:0;">
-                            Status :
-                            <t t-if="doc.selling_price &gt; 0">Sold</t>
-                            <t t-elif="doc.selling_price == 0">Available</t>
-                            <t t-else="">Not Sold</t>
-                        </div>
-                        
-                        <table style="
-                            width:100%;
-                            border-collapse:collapse;
-                            margin-top:2px;
-                            font-size:22px;
-                        ">
-                            <tr>
-                                <th style="border:1px solid black; padding:1px;">Selling Price</th>
-                                <th style="border:1px solid black; padding:1px;">Primary owner</th>
-                                <th style="border:1px solid black; padding:1px;">Shared owner</th>
-                                <th style="border:1px solid black; padding:1px;">Available From</th>
-                            </tr>
-                            <tr>
-                                <td style="border:1px solid black; padding:1px;">
-                                    <t t-out="doc.selling_price"/>
-                                </td>
-                                <td style="border:1px solid black; padding:1px;">
-                                    <t t-foreach="doc.owners_list" t-as="owner">
-                                        <t t-out="owner.name"/>
-                                        <br/>
-                                    </t>
-                                </td>
-                                <td style="border:1px solid black; padding:1px;">
-                                    <t t-foreach="doc.shared_owner_ids" t-as="shared">
-                                        <t t-out="shared.name"/>
-                                        <br/>
-                                    </t>
-                                </td>
-                                <td style="border:1px solid black; padding:1px;">
-                                    <t t-out="doc.date_available"/>
-                                </td>
-                            </tr>
+
+                        <table style="width:100%; border-collapse:collapse; margin-top:25px; font-size:17px;">
+                            <thead>
+                                <tr style="background:#f0f0f0;">
+                                    <th style="border:1px solid #000; padding:8px;">Selling Price</th>
+                                    <th style="border:1px solid #000; padding:8px;">Primary Owner</th>
+                                    <th style="border:1px solid #000; padding:8px;">Shared Owner</th>
+                                    <th style="border:1px solid #000; padding:8px;">Available From</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                    <td style="border:1px solid #000; padding:8px;">
+                                        <t t-out="doc.selling_price"/>
+                                    </td>
+
+                                    <td style="border:1px solid #000; padding:8px;">
+                                        <t t-foreach="doc.owners_list" t-as="owner">
+                                            <t t-out="owner.name"/><br/>
+                                        </t>
+                                    </td>
+
+                                    <td style="border:1px solid #000; padding:8px;">
+                                        <t t-foreach="doc.shared_owner_ids" t-as="shared">
+                                            <t t-out="shared.name"/><br/>
+                                        </t>
+                                    </td>
+
+                                    <td style="border:1px solid #000; padding:8px;">
+                                        <t t-out="doc.date_available"/>
+                                    </td>
+
+                                </tr>
+                            </tbody>
                         </table>
+
                     </div>
+
                 </t>
             </t>
         </t>
     </template>
-    <record id="action_report-custom_pdf" model="ir.actions.report">
+
+    <record id="action_report_custom_pdf" model="ir.actions.report">
         <field name="name">Property Enquiry</field>
         <field name="model">estate.property</field>
         <field name="report_type">qweb-pdf</field>
@@ -75,4 +128,5 @@
         <field name="binding_model_id" ref="mycompany_custom.model_estate_property"/>
         <field name="binding_type">report</field>
     </record>
+
 </odoo>

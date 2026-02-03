@@ -47,7 +47,9 @@ class EstateProperty(models.Model):
     # Correcting the _name value with quotes
     _name = 'estate.property'
     _description = 'Real estate Property'
-    
+
+
+    image_field_name = fields.Binary(string='Image', attachment=True)
     name = fields.Char(string='Property Name', required=True, size=50)
     user_id = fields.Many2one('res.users' , string="Created By", default=lambda self: self.env.user , ondelete='set null' , index=True , tracking=True)
     postcode = fields.Integer(string='Postcode', required=True, help='Postal area', size=5)
