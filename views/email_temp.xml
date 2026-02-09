@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree / other view (if any) -->
+    <record id="tree_view_email" model="ir.ui.view">
+        <field name="name">tree.view.email</field>
+        <field name="model">property.mail.wizard</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="property_id"/>
+                <field name="email_to"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- ACTION: Open Email Wizard -->
+    <record id="action_property_mail_wizard" model="ir.actions.act_window">
+        <field name="name">Send Property Email</field>
+        <field name="res_model">property.mail.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">
+            {
+                'default_property_id': active_id
+            }
+        </field>
+    </record>
+
+</odoo>

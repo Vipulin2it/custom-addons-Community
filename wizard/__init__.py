@@ -1,1 +1,1 @@
-from . import properties_enquiry
+from . import properties_enquiry,email_wizard
