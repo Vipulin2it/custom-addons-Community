@@ -70,9 +70,7 @@ class Owner(models.Model):
         store=True
     )
 
-    # -------------------------------------------------
-    # COMPUTE METHODS
-    # -------------------------------------------------
+
 
     @api.depends('date_of_birth')
     def _compute_age(self):
