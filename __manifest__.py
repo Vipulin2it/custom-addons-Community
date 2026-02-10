@@ -10,6 +10,7 @@
         "security/ir.model.access.csv",
         "data/owner.csv",
         # "data/estate.property.csv",
+        "data/owner.xml",
         "views/estate_property.xml",
         "views/owner.xml",
         "views/enquiry.xml",
