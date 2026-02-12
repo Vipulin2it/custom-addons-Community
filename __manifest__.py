@@ -5,7 +5,7 @@
     "category": "Custom",
     "author": "MyCompany",
     "license": "LGPL-3",
-    "depends": ["base", "sale", "web","mail"],
+    "depends": ["base", "sale", "web","mail","report_xlsx",],
     "data": [
         "security/ir.model.access.csv",
         "data/owner.csv",
@@ -24,6 +24,7 @@
         "report/qweb_report.xml",
         "report/qweb_custom_pdf.xml",
         "Email_template/email.xml",
+        "report/report_action_xslx.xml"
     ],
     "demo": [
         "demo/demo_data_xml.xml"

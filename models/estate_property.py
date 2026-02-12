@@ -29,7 +29,11 @@ class EstateProperty(models.Model):
     bedrooms = fields.Integer(string='Bedrooms')
     living_area = fields.Integer(string='Living Area(sqm)')
     garage = fields.Boolean(string='Garage')
-
+    state= fields.Selection(
+        [('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accepted', 'Offer Accepted'), ('sold', 'Sold'), ('canceled', 'Canceled')],
+        string='Status',
+        default='new'
+    )
     company_id = fields.Many2one(
         'res.company',
         string='Company',

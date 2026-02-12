@@ -32,9 +32,9 @@
                     <field name="company_id"/>
                     <field name="user_id"/>
                     <field name="name"/>
-                    <field name="postcode"/>
-                    <field name="expected_price"/>
-                    <field name="selling_price"/>
+                    <field name="postcode" widget="badge" decoration-info="postcode != False"/>
+                    <field name="expected_price" decoration-success="expected_price > 0"/>
+                    <field name="selling_price" decoration-success="selling_price > 0"/>
                     <field name="description"/>
                     <field name="bedrooms"/>
                     <field name="living_area"/>
@@ -65,6 +65,7 @@
                         <button name="%(action_property_mail_wizard)d"
                                 string="Mail"
                                 type="action"/>
+                        <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold,canceled" options="{'clickable': True}"/>
                     </header>
 
                     <sheet>
@@ -129,6 +130,31 @@
                         <field name="message_ids"/>
                     </div>
                 </form>
+            </field>
+        </record>
+
+        <record id="kanban_estate_property" model="ir.ui.view">
+            <field name="name">estate.property.kanban</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record">
+                                <div class="o_kanban_image">
+                                    <field name="image_field_name" widget="image" options="{'size': [200, 200]}"/>
+                                </div>
+                                <div class="o_kanban_details">
+                                    <strong><field name="name"/></strong>
+                                    <p><field name="property_addr"/></p>
+                                    <p><field name="postcode"/></p>
+                                    <p><field name="expected_price"/></p>
+                                    <p><field name="selling_price"/></p>
+                                </div>
+                            </div>
+                        </t>            
+                    </templates>
+                </kanban>
             </field>
         </record>
 

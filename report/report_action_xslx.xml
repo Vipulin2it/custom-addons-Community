@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <record id="action_report_property_xlsx" model="ir.actions.report">
+        <field name="name">Property Enquiry (Excel)</field>
+        <field name="model">estate.property</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">mycompany_custom.property_xlsx_report</field>
+        <field name="report_file">Property_Enquiry</field>
+        <field name="binding_model_id" ref="mycompany_custom.model_estate_property"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
