@@ -1,36 +1,58 @@
 .o_field_Customtrial {
-    display: inline-flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: 25px; // Ensures everything inside is strong
 
-    &.o_state_toggler {
+    /* ===== TOGGLER ===== */
+    .o_customtrial_toggler {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
         padding: 4px 12px;
-        font-size: 13px;
         white-space: nowrap;
-        border-radius: 50px; // Matches the "pill" look from your JS
+        font-weight: 600;
     }
 
-    .fa {
-        font-size: 1.2em;
-        vertical-align: middle;
+    /* ===== ICON BOX (IMPORTANT PART) ===== */
+    .o_customtrial_icon {
+        width: 18px;            // SAME EVERYWHERE
+        height: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        i {
+            font-size: 1.1em;
+            line-height: 1;
+        }
+
+        .o_status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
     }
 
-    // Matching the "o_status_bubble" logic from your snippet
-    .o_status {
-        width: 12px;
-        height: 12px;
-        display: inline-block;
-        border-radius: 50%;
-        vertical-align: middle;
+    /* ===== LABEL ===== */
+    .o_customtrial_label {
+        line-height: 1.2;
+        display: inline-flex;
+        align-items: center;
     }
-}
 
-// Ensure the dropdown items are also bold when the list opens
-.dropdown-menu {
-    .dropdown-item {
-        span.fw-bold {
-            font-weight: 700 !important;
+    /* ===== DROPDOWN ===== */
+    .dropdown-menu {
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* REMOVE ALL JUGAAD */
+        .fa,
+        .o_status {
+            margin: 0 !important;
+            transform: none !important;
+            vertical-align: middle;
         }
     }
 }
