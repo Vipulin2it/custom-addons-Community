@@ -5,11 +5,11 @@ class PropertiesEnquiryWizard(models.TransientModel):
     _description = "Properties Enquiry Wizard"
 
 
-    property_type = fields.Many2one('estate.property',string="Property Type")
-    person_name = fields.Char(string="Person Name", required=True)
-    person_email = fields.Char(string="Person Email", required=True)
-    contact_number = fields.Integer(string="Contact Number", required=True, max_length=5)
-    enquiry_message = fields.Text(string="Enquiry Message")
+    property_type = fields.Many2one('estate.property',string="Property Type" , store=True)
+    person_name = fields.Char(string="Person Name", required=True , store=True)
+    person_email = fields.Char(string="Person Email", required=True , store=True)
+    contact_number = fields.Integer(string="Contact Number", required=True, max_length=5 , store=True)
+    enquiry_message = fields.Text(string="Enquiry Message" , store=True)
 
     def action_send_enquiry(self):
         vals={

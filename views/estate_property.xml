@@ -1,191 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Tree View -->
-    <record id="view_estate_property_tree" model="ir.ui.view">
-        <field name="name">estate.property.tree</field>
-        <field name="model">estate.property</field>
-        <field name="arch" type="xml">
-            <tree>
-                <header>
-                    <button name="edit_button" string="Edit" type='object' class="oe_highlight" display="always"/>
-                    <button name="create_button" string="Create" type='object' class="oe_highlight" display="always"/>
-                    <button name="action_send_msg" string="Enquiry" type="object" class="oe_stat_button" display="always"/>
-                </header>
-                <field name="company_id"/>
-                <field name="id"/>
-                <field name="user_id"/>
-                <field name="name"/>
-                <field name="postcode"/>
-                <field name="expected_price"/>
-                <field name="selling_price"/>
-                <field name="description"/>
-                <field name="bedrooms"/>
-                <field name="living_area"/>
-                <field name="garage" widget="boolean"/>
-                <field name="garden" widget="boolean_toggle"/>
-                <field name="garden_message"/>
-                <field name="owners_list"  widget="many2one_tags"/>
-                <field name="shared_owner_ids"/>
-            </tree>
-        </field>
-    </record>
-    <!-- Form View -->
-    <record id="view_estate_property_form" model="ir.ui.view">
-        <field name="name">estate.property.form</field>
-        <field name="model">estate.property</field>
-        <field name="arch" type="xml">
-            <form string="Property">
-                <header>
-                    <button name="edit_button" string="Edit" type='object' class="oe_highlight" display="always"/>
-                    <button name="create_button" string="Create" type='object' class="oe_highlight" display="always"/>
-                    <button name="button_field_get" string="button_field_get" type='object' class="oe_highlight" display="always"/>
-                </header>
-                <sheet>
-                    <h1 style="">New House</h1>
+    <data>
+        <!-- Tree View -->
+        <record id="view_estate__property_tree" model="ir.ui.view">
+            <field name="name">estate.property.tree</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                        <button name="%(action_property_mail_wizard)d"
+                                string="Mail"
+                                type="action"
+                                display="always"/>
+                        <button name="action_send_msg"
+                                string="Enquiry"
+                                type="object"
+                                display="always"/>
+                        <button name="print_custom_report"
+                                string="Report"
+                                type="object"
+                                class="oe_highlight"
+                                display="always"/>
+                    </header>
+                    <field name="image_field_name" widget="image" options="{'size': [64, 64]}"/>
+                    <field name="property_addr"/>
                     <field name="company_id"/>
-                    <group>
+                    <field name="user_id"/>
+                    <field name="name"/>
+                    <field name="postcode" widget="badge" decoration-info="postcode != False"/>
+                    <field name="expected_price" decoration-success="expected_price > 0"/>
+                    <field name="selling_price" decoration-success="selling_price > 0"/>
+                    <field name="description"/>
+                    <field name="bedrooms"/>
+                    <field name="living_area"/>
+                    <field name="activity_ids" widget="list_activity" optional="show" />
+                    <field name="garage" widget="boolean"/>
+                    <field name="garden" widget="boolean_toggle"/>
+                    <field name="garden_message"/>
+                    <field name="owners_list" widget="badge"/>
+                    <field name="shared_owner_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Form View -->
+        <record id="view_estate_property_form" model="ir.ui.view">
+            <field name="name">estate.property.form</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <form string="Property">
+                    <header>
+                        <button name="button_field_get"
+                                string="button_field_get"
+                                type="object"
+                                class="oe_highlight"/>
+                        <button name="print_custom_report"
+                                string="Report"
+                                type="object"
+                                class="oe_highlight"/>
+                        <button name="%(action_property_mail_wizard)d"
+                                string="Mail"
+                                type="action"/>
+                        <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold,canceled" options="{'clickable': True}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="action_open_shared_owners" display="always" type="object" >
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text"/>
+                                    <span class="o_stat_value">
+                                        <field name="shared_owner_ids" widget="statinfo"/>
+                                    </span>
+                                </div>
+                            </button>
+                        </div>
+                        <field name="image_field_name"
+                               widget="image"
+                               class="oe_avatar"
+                               options="{'size': [150, 150]}"/>
+                        <h1>New House</h1>
+                        <field name="company_id"/>
                         <group>
-                            <field name="user_id"/>
-                            <field name="name"/>
-                            <field name="postcode"/>
-                            <field name="date_available"/>
-                            <!-- <field name="name"/> -->
-                        </group>
-                        <group>
-                            <field name="expected_price"/>
-                            <field name="selling_price"/>
-                        </group>
-                    </group>
-                    <notebook>
-                        <page string="Description" class="oe_highlight">
                             <group>
-                                <field name="description"/>
-                                <field name="bedrooms"/>
-                                <field name="living_area"/>
-                                <field name="garage" widget="boolean"/>
-                                <field name="garden" />
-                                <field name="garden_message"/>
+                                <field name="property_addr"/>
+                                <field name="user_id"/>
+                                <field name="name"/>
+                                <field name="postcode"/>
+                                <field name="date_available"/>
                             </group>
-                        </page>
-                        <page string="Owner_list">
                             <group>
-                                <field name="owners_list" />
-                                <field name="shared_owner_ids"/>
+                                <field name="expected_price"/>
+                                <field name="selling_price"/>
                             </group>
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
-    <!-- Action -->
-    <record id="action_estate_property" model="ir.actions.act_window">
-        <field name="name">Properties</field>
-        <field name="res_model">estate.property</field>
-        <field name="view_mode">tree,kanban,form</field>
-    </record>
-    <!-- Menu -->
-    <menuitem id="menu_estate_root" name="Estate"/>
-    <menuitem
-        id="menu_estate_property"
-        name="Properties"
-        parent="menu_estate_root"
-        action="action_estate_property"/>
-    <!-- treeview  -->
-    <record id="estate_property__offer_tree_view" model='ir.ui.view'>
-        <field name="name">estate.property.offer.tree</field>
-        <field name="model">estate.property.offer</field>
-        <field name="arch" type="xml">
-            <tree>
-                <header>
-                    <button name="reads_grouping" string="Group Read" type="object" class="oe_highlight" display="always"/>
-                    <button name="read_search_read" string="Search Read" type="object" class="oe_highlight" display="always"/>
-                </header>
-                <field name="owner_id"/>
-                <field name="owner_contact"/>
-                <field name="person_gender" decoration-danger="person_gender == 'male'" decoration-success="person_gender == 'female'"/>
-                <field name="price"/>
-                <field name="binary_file"/>
-                <field name="html_file"/>
-                <field name="image_file"/>
-                <field name="currency" widget="monetary" />
-                <field name="deadline_date"/>
-            </tree>
-        </field>
-    </record>
-
-
-     form view
-    <record id="estate_property_offer_form_view" model="ir.ui.view">
-        <field name="name">estate.propert.offer.form</field>
-        <field name="model">estate.property.offer</field>
-        <field name="arch" type="xml">
-            <form string="Offer">
-                <sheet>
-                    <group>
-                        <group>
-                            <field name="owner_id"/>
-                            <field name="owner_contact"/>
-                            <field name="image_file"/>
-                            <field name="currency" widget="monetary"/>
-                            <field name="price"/>
-                            <field name="person_gender"/>
                         </group>
+                        <notebook>
+                            <page string="Description">
+                                <group>
+                                    <field name="description"/>
+                                    <field name="bedrooms"/>
+                                    <field name="living_area"/>
+                                    <field name="garage"/>
+                                    <field name="garden"/>
+                                    <field name="garden_message"/>
+                                </group>
+                            </page>
+                            <page string="Owner_list">
+                                <group>
+                                    <field name="owners_list" />
+                                    <field name="shared_owner_ids"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="kanban_estate_property" model="ir.ui.view">
+            <field name="name">estate.property.kanban</field>
+            <field name="model">estate.property</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="image_field_name" widget="image" options="{'size': [200, 200]}"/>
+                    <field name="name"/>
+                    <field name="property_addr"/>
+                    <field name="expected_price"/>
+                    <field name="selling_price"/>
+                    <field name="date_available"/>
+                    <field name="name"/>
+                    <field name="property_addr"/>
+                    <field name="expected_price"/>
+                    <field name="selling_price"/>
+                    <field name="date_available"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban-card">
+                                <span class="oe_kanban_image">
+                                    <field name="image_field_name" widget="image" options="{'size': [200, 200]}"/>
+                                </span>
+                                <div class="oe_kanban_details">
+                                    <strong>
+                                        <field name="name"/>
+                                    </strong>
+                                    <br/>
+                                    <field name="property_addr"/>
+                                    <br/>
+                                    <field name="expected_price"/>
+                                    <br/>
+                                    <field name="selling_price"/>
+                                    <br/>
+                                    <field name="date_available"/>
+                                    <br/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- Action -->
+        <record id="action_estate_property" model="ir.actions.act_window">
+            <field name="name">Properties</field>
+            <field name="res_model">estate.property</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+        <!-- Menu -->
+        <menuitem id="menu_estate_root" name="Estate"/>
+        <menuitem id="menu_estate_property"
+                  name="Properties"
+                  parent="menu_estate_root"
+                  action="action_estate_property"/>
+        <!-- Offer Tree View -->
+        <record id="estate_property__offer_tree_view" model="ir.ui.view">
+            <field name="name">estate.property.offer.tree</field>
+            <field name="model">estate.property.offer</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                        <button name="reads_grouping"
+                                string="Group Read"
+                                type="object"
+                                class="oe_highlight"/>
+                        <button name="read_search_read"
+                                string="Search Read"
+                                type="object"
+                                class="oe_highlight"/>
+                    </header>
+                    <field name="owner_id"/>
+                    <field name="owner_contact"/>
+                    <field name="person_gender" widget="badge"
+                           decoration-danger="person_gender == 'female'"
+                           decoration-success="person_gender == 'male'"/>
+                    <field name="price"/>
+                    <field name="binary_file"/>
+                    <field name="html_file"/>
+                    <field name="image_file" widget="image" options="{'size': [100, 100]}"/>
+                    <field name="currency" widget="monetary"/>
+                    <field name="curr_id" invisible="1"/>
+                    <field name="deadline_date"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Offer Form View -->
+        <record id="estate_property_offer_form_view" model="ir.ui.view">
+            <field name="name">estate.property.offer.form</field>
+            <field name="model">estate.property.offer</field>
+            <field name="arch" type="xml">
+                <form string="Offer">
+                    <sheet>
+                        <div class="d-flex align-items-center mb-3">
+                           
+                            <div style="flex: ;">
+                                <div class="_title">
+                                     <strong>Owner Details  </strong>
+                                    <field name="owner_id" />
+                                </div>
+                            </div>
+
+                           
+                            <div class="ms-auto">
+                                <field name="person_name"
+                                       widget="custom_trial"
+                                       nolabel="1"
+                                       class="o_field_Customtrial"/>
+                            </div>
+                        </div>
+
                         <group>
-                            <field name="binary_file"/>
-                            <field name="html_file"/>
-                            <field name="deadline_date"/>
-                            <button name="action_test" string="Test Object button" type="object" class="oe_highlight"/>
-                            <button name="%(mycompany_custom.action_owner)d" type="action" string="test_action_button" class="oe_highlight"/>
+                            <group>
+                                <field name="owner_contact"/>
+                                <field name="image_file"/>
+                                <field name="currency" widget="monetary"/>
+                                <field name="curr_id" invisible="1"/>
+                                <field name="price"/>
+                            </group>
+                            <group>
+                                
+                                
+                                <field name="person_gender" widget="offer_state_selection" nolabel="1"/>
+                                <br/>
+                                <field name="binary_file"/>
+                                <field name="html_file"/>
+                                <field name="deadline_date"/>
+                                <button name="action_test"
+                                        string="Test Object button"
+                                        type="object"
+                                        class="oe_highlight"/>
+                                <button name="%(mycompany_custom.action_owner)d"
+                                        type="action"
+                                        string="test_action_button"
+                                        class="oe_highlight"/>
+                            </group>
                         </group>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-    <record id="search_view_estate_property_offer" model="ir.ui.view">
-        <field name="name">estate.property.offer.search</field>
-        <field name="model">estate.property.offer</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="owner_id"/>
-                <field name="owner_contact"/>
-                <field name="price"/>
-                <field name="person_gender"/>
-                <field name="deadline_date"/>
-                <!-- <filter name="filter_high_value_offers" string="High Value Offers" domain="[('price','&gt;',100000)]"/> -->
-                <!-- <group expand="0" string="Group By">
-                    <field string="Owner" name="owner_id" context="{'group_by': 'owner_id'}"/>
-                </group> -->
-            </search>
-        </field>
-    </record>
-    <!-- actions  -->
-    <record id="actions_estate_property_offer" model="ir.actions.act_window">
-        <field name="name">Offers</field>
-        <field name="res_model">estate.property.offer</field>
-        <field name="view_mode">tree,form,search,kanban</field>
-        <!-- <field name="view_id" ref="estate_property__offer_tree_view"/> -->
-        <!-- <field name="context">{'group_by':'owner_id'}</field> -->
-    </record>
-
-     menu item
-    <menuitem 
-        id="menu_item_estate_property_offer"
-        name="Offers"
-        parent="menu_estate_root"
-        action="actions_estate_property_offer"
-    />
-    <!-- #inherit the sale order to add postcode field   
-
-    <record id="view_sale_order_form_inherit_postcode" model="ir.ui.view">
-    <field name="name">sale.order.form.inherit.postcode</field>
-    <field name="model">sale.order</field>
-    <field name="inherit_id" ref="sale.view_order_form"/>
-    <field name="arch" type="xml">
-        <xpath expr="//field[@name='validity_date']" position="after">
-            <field name="postcode"/>
-        </xpath>
-    </field>
-    </record> -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Search View -->
+        <record id="search_view_estate_property_offer" model="ir.ui.view">
+            <field name="name">estate.property.offer.search</field>
+            <field name="model">estate.property.offer</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="owner_id"/>
+                    <field name="owner_contact"/>
+                    <field name="price"/>
+                    <field name="person_gender"/>
+                    <field name="deadline_date"/>
+                </search>
+            </field>
+        </record>
+        <!-- Offer Action -->
+        <record id="actions_estate_property_offer" model="ir.actions.act_window">
+            <field name="name">Offers</field>
+            <field name="res_model">estate.property.offer</field>
+            <field name="view_mode">tree,form,search,kanban</field>
+        </record>
+        <!-- Offer Menu -->
+        <menuitem id="menu_item_estate_property_offer"
+                  name="Offers"
+                  parent="menu_estate_root"
+                  action="actions_estate_property_offer"/>
+    </data>
 </odoo>

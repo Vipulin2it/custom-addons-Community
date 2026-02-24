@@ -1,0 +1,22 @@
+/* Increase row height */
+.o_list_view .o_data_row > td {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    vertical-align: middle;
+}
+
+/* Extra spacing when images are present */
+.o_list_view .o_data_row img {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+/* Make rows breathe */
+.o_list_view .o_data_row {
+    border-bottom: 1px solid #eaeaea;
+}
+
+/* Optional: Add some padding to the last row */
+.o_list_view .o_data_row:last-child {
+    padding-bottom: 15px !important;
+}

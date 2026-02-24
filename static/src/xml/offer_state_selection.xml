@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="offer.OfferStateSelection"
+       t-inherit="web.StateSelectionField"
+       t-inherit-mode="primary">
+
+        <!-- pill content -->
+        <xpath expr="//t[@t-set-slot='toggler']/div" position="replace">
+            <div class="o_OfferStateSelection_toggler">
+                <span class="o_OfferStateSelection_icon">
+                    <i t-attf-class="{{ stateIcon(currentValue) }} {{ statusColor(currentValue) }}"/>
+                </span>
+                <span class="o_OfferStateSelection_label" t-out="label"/>
+            </div>
+        </xpath>
+
+         <!-- dropdown config -->
+        <xpath expr="//Dropdown" position="attributes">
+            <attribute name="togglerClass">
+                getTogglerClass(currentValue)
+            </attribute>   
+        </xpath>
+
+        <!-- dropdown icons -->
+        <xpath expr="//DropdownItem/span[1]" position="replace">
+            <span class="o_OfferStateSelection_icon">
+                <i t-attf-class="{{ stateIcon(option[0]) }}"/>
+            </span>
+        </xpath>
+
+        <xpath expr="//DropdownItem/span[2]" position="replace"> 
+            <span class="o_OfferStateSelection_label" t-attf-class="{{ statusColor(option[0]) }}" t-out="option[1]"/>
+        </xpath>
+
+    </t>
+</templates>

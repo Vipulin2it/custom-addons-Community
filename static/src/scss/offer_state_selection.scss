@@ -1,0 +1,60 @@
+.o_field_OfferStateSelection {
+
+    
+    .o_OfferStateSelection_toggler {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px;
+        white-space: nowrap;
+        font-weight: 600;
+    }
+
+    
+    .o_OfferStateSelection_icon {
+        width: 30px;            // SAME EVERYWHERE
+        height: 30px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        gap: 5px ;
+
+        i {
+            font-size: 1.1em;
+            line-height: 1;
+        }
+
+        .o_status {
+            width: 55px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    }
+
+    
+    .o_OfferStateSelection_label {
+        line-height: 1.2;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    
+    .dropdown-menu {
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: larger;
+        }
+
+        
+        .fa,
+        .o_status {
+            margin: 0 !important;
+            transform: none !important;
+            vertical-align: middle;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo> 
+    <record id="estate_property_152" model="estate.property">
+        <field name="name">Property DEMO 1</field>
+        <field name="postcode">12345</field>
+        <field name="expected_price">500000</field>
+    </record>
+    <record id="estate_property_1532" model="estate.property">
+        <field name="name">Property DEMO 2</field>
+        <field name="postcode">45678</field>
+        <field name="expected_price">600000</field>
+    </record>
+    <record id="estate_property_1543" model="estate.property">
+        <field name="name">Property DEMO 3</field>
+        <field name="postcode">78901</field>
+        <field name="expected_price">700000</field>
+    </record>
+
+</odoo>

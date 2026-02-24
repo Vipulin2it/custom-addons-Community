@@ -1,96 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Tree View -->
-    <record id="tree_view_owner" model="ir.ui.view">
-        <field name="name">tree.view.owner</field>
-        <field name="model">owner</field>
-        <field name="arch" type="xml">
-            <tree>
-            <header>
-            <button name="delete_record" string="Delete Record" type="object" class="oe_highlight" display="always"/>
-            <!-- <button name="search_records" string="Search Records" type="object" class="oe_highlight" display="always"/>
-            <button name="count_record" string="Search Count" type="object" class="oe_highlight" display="always"/> -->
-            <button name="read_button" string="Read Records" type="object" class="oe_highlight" display="always"/>
-            <button name="button_filtered_record" string="Filtered Records" type="object" class="oe_highlight" display="always"/>
-            <button name="button_sorted_record" string="Sorted Records" type="object" class="oe_highlight" display="always"/>
-            <button name="button_grouped_record" string="Grouped Records" type="object" class="oe_highlight" display="always"/>
-            </header>
-                <!-- <field name="serial_no"/> -->
-                <field name="user_id"/>
-                <field name="id"/>
-                <field name="child_ids"/>
-                <field name="parent_id"/>
-                <field name="name"/>
-                <field name="contact_info"/>
-                <field name="date_of_birth"/>
-                <field name="age"/>
-                <field name="shared_property_ids"/>
-                <field name="reference_field"/>
-                <field name="gender"/>
-                <field name="active" widget="boolean_toggle"/>
-            </tree>
-        
-        </field>
-           </record>
+    <data>
 
-    <!-- Form view -->
-    <record id="form_view_owner" model="ir.ui.view">
-        <field name="name">form.view.owner</field>
-        <field name="model">owner</field>
-        <field name="arch" type="xml">
-            <form>
-            <header>
-                <!-- <button name="custom_button" string="Create Record" type="object" class="oe_highlight" /> -->
-                <!-- <button name="custom_write" string="Custom Write" type="object" class="oe_highlight" />  -->
-                <!-- <button name="duplicate_record" string="Duplicate Record" type="object" class="oe_highlight" /> -->
-                <button name="delete_record" string="Delete Record" type="object" class="oe_highlight" />
+        <!-- Tree View -->
+        <record id="tree_view_owner" model="ir.ui.view">
+            <field name="name">tree.view.owner</field>
+            <field name="model">owner</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <header>
+                        <button name="delete_record" string="Delete Record" type="object" class="oe_highlight" display="always"/>
+                        <!-- <button name="search_records" string="Search Records" type="object" class="oe_highlight" display="always"/>
+                        <button name="count_record" string="Search Count" type="object" class="oe_highlight" display="always"/> -->
+                        <button name="read_button" string="Read Records" type="object" class="oe_highlight" display="always"/>
+                        <button name="button_filtered_record" string="Filtered Records" type="object" class="oe_highlight" display="always"/>
+                        <button name="button_sorted_record" string="Sorted Records" type="object" class="oe_highlight" display="always"/>
+                        <button name="button_grouped_record" string="Grouped Records" type="object" class="oe_highlight" display="always"/>
+                    </header>
 
-            </header>
-                <sheet>
-                    <notebook>
-                        <page string="Personal Info" class="oe_highlight">
-                            <group>
-                                <field name="user_id"/>
-                                <field name="name"/>
-                                <field name="contact_info"/>
-                                <field name="date_of_birth"/>
-                                <field name="age"/>
-                                <field name="gender"/>
-                                <field name="active" widget="boolean_toggle"/>
-                            </group>
-                        </page>
-                        <page string="Property Info" class="oe_highlight">
-                            <group>
-                               
-                                <field name="parent_id"/>
-                                <field name="child_ids"/>
-                                <field name="shared_property_ids"/>
-                                <field name="reference_field"/>
-                             
-                            </group>
-                        </page>
-                    </notebook>
-                </sheet>
-                
-            </form>
-        </field>
-    </record>
+                    <!-- <field name="serial_no"/> -->
+                    <field name="user_id"/>
+                    <field name="id"/>
+                    
+                    <field name="property_id"/>
+                    <field name="name"/>
+                    <field name="contact_info"/>
+                    <field name="date_of_birth"/>
+                    <field name="age"/>
+                    <field name="reference_field"/>
+                    <field name="gender"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </tree>
+            </field>
+        </record>
 
-    <record  id="action_owner" model="ir.actions.act_window">
-        <field name="name">Owner</field>
-        <field name="res_model">owner</field>
-        <field name="view_mode">tree,form,kanban</field>
-    </record>
+        <!-- Form View -->
+        <record id="form_view_owner" model="ir.ui.view">
+            <field name="name">form.view.owner</field>
+            <field name="model">owner</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <!-- <button name="custom_button" string="Create Record" type="object" class="oe_highlight"/> -->
+                        <!-- <button name="custom_write" string="Custom Write" type="object" class="oe_highlight"/> -->
+                        <!-- <button name="duplicate_record" string="Duplicate Record" type="object" class="oe_highlight"/> -->
+                        <button name="delete_record" string="Delete Record" type="object" class="oe_highlight"/>
+                    </header>
 
-   
+                    <sheet>
+                        <notebook>
+                            <page string="Personal Info" class="oe_highlight " name="personal_info">
+                                <group>
+                                    <field name="user_id"/>
+                                    <field name="name"/>
+                                    <field name="contact_info"/>
+                                    <field name="date_of_birth"/>
+                                    <field name="age"/>
+                                    <field name="gender"/>
+                                    <field name="active" widget="boolean_toggle"/>
+                                </group>
+                            </page>
 
-    <menuitem 
-        id="sub_menu_owner"
-        name="Owner"
-        parent="menu_estate_root"
-        action="action_owner"/>
+                            <page string="Property Info" class="oe_highlight">
+                                <group>
+                                    <field name="property_id"/>
+                                    <field name="reference_field"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
+        <!-- Action -->
+        <record id="action_owner" model="ir.actions.act_window">
+            <field name="name">Owner</field>
+            <field name="res_model">owner</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
 
+        <!-- Menu -->
+        <menuitem
+            id="sub_menu_owner"
+            name="Owner"
+            parent="menu_estate_root"
+            action="action_owner"/>
 
-
+    </data>
 </odoo>

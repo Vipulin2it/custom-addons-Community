@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_extended_model_owner_form" model="ir.ui.view">
+            <field name="name">owner.form.extended</field>
+            <field name="model">owner</field>
+            <field name="inherit_id" ref="mycompany_custom.form_view_owner"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='personal_info']/group/field[@name='contact_info']" position="after">
+                    <field name="additional_info"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+
+
+    <record id="view_extended_model_owner_tree" model="ir.ui.view">
+        <field name="name">owner.tree.extended</field>
+        <field name="model">owner</field>
+        <field name="inherit_id" ref="mycompany_custom.tree_view_owner"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='contact_info']" position="after">
+                <field name="additional_info"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="form_view_owner_address" model="ir.ui.view">
+        <field name="name">owner.address.form.extended</field>
+        <field name="model">address</field>
+        <field name="arch" type="xml">
+            <form string="Address">
+                <sheet>
+                    <group>
+                        <field name="owner_id"/>
+                        <field name="Owner_city"/>
+                        <field name="Owner_pincode"/>
+                        <field name="Owner_additional_info"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tree_view_owner_address" model="ir.ui.view">
+        <field name="name">owner.address.tree.extended</field>
+        <field name="model">address</field>
+        <field name="arch" type="xml">
+            <tree string="Address">
+                <field name="owner_id"/>
+                <field name="Owner_city"/>
+                <field name="Owner_pincode"/>
+                <field name="Owner_additional_info"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_owner_address" model="ir.actions.act_window">
+        <field name="name">Owner Addresses</field>
+        <field name="res_model">address</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_owner_address" name="Owner Addresses" parent="menu_estate_root" action="action_owner_address"/>
+
+
+
+
+
+    ##inherited the notebook page
+    <record id="view_extended_in_sale" model="ir.ui.view">
+        <field name="name">view.extended.in.sale</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='customer_signature']" position="after">
+                <page string="Custom Page" name="new_custom_page">
+                    <group>
+                        <field name="user_id"/>
+                        <field name="name"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+
+
+
+
+
+
+
+
+
+
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>    
+    
+    <data>
+        <record id="view_offer_form_statusbar" model="ir.ui.view">
+            <field name="name">offer.form.extended</field>
+            <field name="model">estate.property.offer</field>
+            <field name="inherit_id" ref="mycompany_custom.form_view_offer"/>
+            <field name="arch" type="xml">
+
+                
+                <xpath expr="//form/header" position="inside">
+                    
+                    <field name="person_gender" 
+                           widget="badge"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+
+</odoo>

@@ -3,3 +3,4 @@ access_estate_property,estate.property,model_estate_property,,1,1,1,1
 access_estate_property_offer,estate.property.offer,model_estate_property_offer,,1,1,1,1
 access_owner,owner,model_owner,,1,1,1,1
 access_properties_enquiry_wizard,properties.enquiry.wizard,model_properties_enquiry_wizard,,1,1,1,1
+

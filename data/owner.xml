@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="owner_38" model="owner">
+            <field name="name">abc</field>
+            <field name="age">25</field>
+            <field name="contact_info">0987654321</field>
+        </record>
+
+
+        <record id="owner_39" model="owner">
+            <field name="name">igv</field>
+            <field name="age">30</field>
+            <field name="contact_info">1234567890</field>
+            <field name="property_id" ref="estate_property_1"/>
+        </record>
+    </data>
+</odoo>

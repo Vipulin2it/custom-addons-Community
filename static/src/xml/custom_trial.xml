@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="CustomtrialTemplate"
+       t-inherit="web.StateSelectionField"
+       t-inherit-mode="primary">
+
+        <!-- TOGGLER -->
+        <xpath expr="//t[@t-set-slot='toggler']/div" position="replace">
+            <div class="o_customtrial_toggler">
+                <span class="o_customtrial_icon">
+                    <i t-attf-class="{{ stateIcon(currentValue) }} {{ statusColor(currentValue) }}"/>
+                </span>
+                <span class="o_customtrial_label" t-out="label"/>
+            </div>
+        </xpath>
+
+        <!-- Dropdown button class -->
+        <xpath expr="//Dropdown" position="attributes">
+            <attribute name="togglerClass">
+                getTogglerClass(currentValue)
+            </attribute>
+        </xpath>
+
+        <!-- Dropdown ICON -->
+        <xpath expr="//DropdownItem/span[1]" position="replace">
+            <span class="o_customtrial_icon">
+                <i t-attf-class="{{ stateIcon(option[0]) }}"/>
+            </span>
+        </xpath>
+
+        <!-- Dropdown LABEL -->
+        <xpath expr="//DropdownItem/span[2]" position="replace">
+            <span class="o_customtrial_label fw-bold"
+                  t-attf-class="{{ statusColor(option[0]) }}"
+                  t-out="option[1]"/>
+        </xpath>
+
+    </t>
+</templates>

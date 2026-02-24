@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="email_template_report" model="mail.template">
+        <field name="name">email_template_report</field>
+        <field name="model_id" ref="mycompany_custom.model_estate_property"/>
+        <field name="subject">Property Notification - {{object.name}}</field>
+        <field name="email_from">{{object.user_id.email_formatted or user.email_formatted or company.email}}</field>
+        <field name="email_to">{{object.user_id.email or ''}}</field>
+        <!-- <field name="report_template" ref="mycompany_custom.estate_property_report_action"/>
+        <field name="report_name">Property_{{object.name}}_name</field> -->
+        <!-- <field name="partner_id">{{object.user_id.partner_id.id or false}}</field> -->
+        <field name="body_html" type="html">
+             <p>
+                <span t-out="object.name"/>
+            </p>
+                <div class="text-center">
+                    <img t-attf-src="data:image/png;base64,{{object.image_field_name}}"
+                            style="max-width: 200px; max-height: 100px; width: auto; height: auto;"
+                             alt="Image Loaded"/>
+                </div>
+                <p>Dear Owner,</p>
+                <p>This is a notification for your property <strong><span t-field="object.name"/></strong>.</p>
+                <p>Thank you for using our service.</p>
+                <t t-if="object.bedrooms &gt; 1">
+                    <p> your Bedroom Count : <span t-field="object.bedrooms"/></p>
+                </t>
+                <t t-else="">
+                    <p> Your bedrooms Count is not be shown and its zero</p>
+                </t>
+                <t t-foreach="object.shared_owner_ids"  t-as="owner">
+                    <p>Shared owner is <span t-out="owner.name"/> </p>
+                
+                </t>
+        </field>
+    </record>
+</odoo>
+
+
+
+
+

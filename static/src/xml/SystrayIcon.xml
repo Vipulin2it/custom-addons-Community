@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="estate_SystrayIcon" owl="1">
+        <div class="o_estate_systray_item">
+            <i class="fa fa-home" 
+               t-on-click="_onClickNotification" 
+               style="cursor: pointer; font-size: 18px; padding: 10px;"
+               title="Estate Properties""")/>>
+            <span class="badge badge-pill badge-success" 
+                  t-if="state.count > 0"
+                  style="position: absolute; top: 5px; right: 5px; font-size: 10px;">
+                <t t-esc="state.count""")/>>
+            </span>
+        </div>
+    </t>
+</templates>

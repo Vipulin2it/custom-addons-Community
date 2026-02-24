@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+
+    <t t-name="DashboardTemplate">
+        <div class="p-4 shadow-sm bg-white rounded">
+            <h3>Customer Statistics</h3>
+
+            <!-- Child counter -->
+            <CounterDisplay
+                counter1="state.counter1"
+                counter2="state.counter2"/>
+
+            <div class="mt-3">
+                <strong>Sum of Two Counter: </strong>
+                <span class="text-success" t-esc="getSum()"/>
+            </div>
+
+            <div class="mt-4 d-flex flex-row flex-wrap justify-content-end">
+                <button class="btn btn-primary" t-on-click="incrementCounter1">Incr Counter 1</button>
+                <button class="btn btn-danger ms-2" t-on-click="decrementCounter1">Decr Counter 1</button>
+                <button class="btn btn-info ms-2" t-on-click="incrementCounter2">Incr Counter 2</button>
+                <button class="btn btn-warning ms-2" t-on-click="decrementCounter2">Decr Counter 2</button>
+            </div>
+
+            <!-- Todo Cards -->
+            <h1>My TODO Card List</h1>
+            <h2>Static Todo with dyanmic attributes </h2>
+            <div class="d-flex flex-wrap mt-4">
+                <t t-foreach="state.Todo" t-as="item" t-key="item.id">
+                    <TODOCard todo="item"/>
+                </t>
+            </div>
+
+            <!-- Cards -->
+            <div class="mt-4 d-flex flex-row flex-wrap justify-content-start">
+            <h1>Cards </h1>
+            
+                <Card
+                    title="'Total Customers'"
+                    content="'We have 150 customers in our database.'"/>
+
+                <Card
+                    title="'Active Customers'"
+                    content="'Currently, 120 customers are active.'"/>
+
+                <Card
+                    title="'Customer Stats'"
+                    content="'This card shows how many customers we have .'"/>
+
+                <Card
+                    title="'Safe Card'"
+                    content="htmlContent"/>
+
+                <Card
+                    title="'Unsafe Card'"
+                    content="unsafeContent"
+                    onButtonClick="updateParentCount"/>
+            </div>
+        </div>
+    </t>
+
+
+    <t t-name="TODOCardTemplate">
+        <div class="card m-2 shadow-sm" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title text-primary">
+                    Task #<t t-esc="props.todo.id"/>
+                </h5>
+
+                <div>
+                    <input type="checkbox"
+                        t-att-checked="props.todo.iscomplete"
+                        t-on-change="() => props.todo.iscomplete = !props.todo.iscomplete"/>
+                    <span/>
+                    <span
+                        t-esc="props.todo.name"
+                        t-att-class="props.todo.iscomplete ? 'text-decoration-line-through' : ''"/>
+                </div>
+            </div>
+        </div>
+    </t>
+
+
+    <t t-name="CounterDisplayTemplate">
+        <div class="border p-2 bg-light mb-2">
+            <strong>Current Count in Child 1 : </strong>
+            <span class="text-primary" t-esc="props.counter1"/>
+
+            <div>
+                <strong>Current Count in Child 2 : </strong>
+                <span class="text-danger" t-esc="props.counter2"/>
+            </div>
+        </div>
+    </t>
+
+
+    <t t-name="CardTemplate">
+        <div class="card m-2 shadow-sm" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title text-primary" t-esc="props.title"/>
+                <p class="card-text" t-out="props.content"/>
+
+                <div t-if="props.title === 'Unsafe Card'">
+                    <button class="btn btn-success" t-on-click="props.onButtonClick">
+                        Update Counter TO 100
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="CharCounter" owl="1">
+        <div class="p-3 border rounded shadow-sm bg-white">
+            <label class="form-label fw-bold">Project Description</label>
+            
+            <!-- t-ref connects this textarea to this.textareaRef in JS -->
+            <textarea t-ref="myTextarea" 
+                      class="form-control" 
+                      placeholder="Type your notes here..."></textarea>
+            
+            <div class="mt-2 text-end">
+                <span class="badge rounded-pill bg-info text-dark">
+                    Characters: <t t-esc="state.count"/>
+                </span>
+            </div>
+        </div>
+    </t>
+</templates>
+
+
+
+
+
+
+
+<!-- 
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="MyComponentTemplate">
+        <div class="p-4 shadow-sm bg-white rounded">
+            <h3>Customer Statistics</h3>
+            <p>This is a custom component displayed as a client action.</p>
+            
+        </div>
+    </t>
+</templates>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+<templates xml:space="preserve">
+    <t t-name="PriceConverter">
+        <div class="p-4 shadow-sm bg-white rounded">
+            <h3 >Currency Tool (onWillRender Version)</h3>
+            
+            <div class="mb-3">
+                <label class="form-label">Amount in USD</label>
+                <input type="number" 
+                       class="form-control" 
+                       t-att-value="state.usdAmount" 
+                       t-on-input="updatePrice"/>
+            </div>
+
+            <div >
+                <div >
+                    <strong>USD: $<t t-esc="state.usdAmount"/></strong>
+                    <br/>
+                    <strong>Exchange Rate: <t t-esc="state.exchangeRate"/></strong>
+                </div>
+                <hr/>
+                <h4 class="mb-0 text-primary">
+                    Total: <t t-esc="state.INRAmount"/> INR
+                </h4>
+            </div>
+        </div>
+    </t>
+</templates> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<templates xml:space="preserve">
+    <t t-name="Mydata">
+        <div class="o_custom_view p-3">
+            
+            <t t-if="state.names.length > 0">
+                <t t-foreach="state.names" t-as="name" t-key="name">
+                    <h1 class="text-primary">Welcome, <t t-esc="name"/>!</h1>
+                </t>
+            </t>
+            
+            <t t-else="">
+                <div class="alert alert-info">
+                    <h1>Loading data or no company partners found...</h1>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>   -->

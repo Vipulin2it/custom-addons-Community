@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+
+    <template id="custom_pdf_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout_standard">
+
+                    <t t-set="company" t-value="env.company"/>
+
+                    <div class="page" style="font-size:18px; line-height:1.6; padding:20px;">
+
+                        <!-- Title -->
+                        <h2 style="margin-bottom:20px;">Property Details</h2>
+
+                        <!-- Main info table -->
+                        <div style="width:100%; margin-bottom:20px;">
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr>
+                                    <!-- LEFT: Property Info -->
+                                    <td style="width:75%; vertical-align:top;">
+                                        <div style="margin-bottom:12px;">
+                                            <strong>Property Owner:</strong>
+                                            <span t-out="doc.user_id.name"/>
+                                        </div>
+                                        <div style="margin-bottom:12px;">
+                                            <strong>Property Name:</strong>
+                                            <span t-out="doc.name"/>
+                                        </div>
+                                        <div style="margin-bottom:12px;">
+                                            <strong>Postcode:</strong>
+                                            <span t-out="doc.postcode"/>
+                                        </div>
+                                        <div style="margin-bottom:12px;">
+                                            <strong>Expected Price:</strong>
+                                            <span t-out="doc.expected_price"/>
+                                        </div>
+                                        <div style="margin-bottom:12px;">
+                                            <strong>Status:</strong>
+                                            <t t-if="doc.selling_price &gt; 0">Sold</t>
+                                            <t t-elif="doc.selling_price == 0">Available</t>
+                                            <t t-else="">Not Sold</t>
+                                        </div>
+                                    </td>
+
+                                    <!-- RIGHT: Property Image (Top) -->
+                                    <td style="width:25%; vertical-align:top; text-align:right;">
+                                        <!-- static images add on qweb  -->
+                                        <!-- <img src="/mycompany_custom/static/5.jpg" 
+                                             alt="Property Logo" 
+                                             height="125" width="125"/> -->
+                                        <td style="width:25%; vertical-align:top; text-align:right;">
+                                            <t t-if="doc.image_field_name">
+                                                <!-- normal dyanmic view for image add -->
+                                                <!-- <img t-att-src="image_data_uri(doc.image_field_name)" 
+                                                     alt="property_image" 
+                                                     height="125" width="125"/> -->
+
+                                                <img t-attf-src="data:image/jpg;base64,{{doc.image_field_name}}" alt="property_image" height="125" width="125"/>
+
+                                            </t>
+                                            <t t-else="">
+                                                <span>No image</span>
+                                            </t>
+                                        </td>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Details Table -->
+                        <table style="width:100%; border-collapse:collapse; margin-top:25px; font-size:17px; position:relative;">
+                            <thead>
+                                <tr style="background:#f0f0f0;">
+                                    <th style="border:1px solid #000; padding:8px;">Selling Price</th>
+                                    <th style="border:1px solid #000; padding:8px;">Primary Owner</th>
+                                    <th style="border:1px solid #000; padding:8px;">Shared Owner</th>
+                                    <th style="border:1px solid #000; padding:8px;">Available From</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border:1px solid #000; padding:8px;">
+                                        <t t-out="doc.selling_price"/>
+                                    </td>
+                                    <td style="border:1px solid #000; padding:8px;">
+                                        <t t-foreach="doc.owners_list" t-as="owner">
+                                            <t t-out="owner.name"/><br/>
+                                        </t>
+                                    </td>
+                                    <td style="border:1px solid #000; padding:8px;">
+                                        <t t-foreach="doc.shared_owner_ids" t-as="shared">
+                                            <t t-out="shared.name"/><br/>
+                                        </t>
+                                    </td>
+                                    <td style="border:1px solid #000; padding:8px;">
+                                        <t t-out="doc.date_available"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- QR Code at bottom-right -->
+                        <div style="text-align:right; margin-top:10px;">
+                            <img t-attf-src="/report/barcode/QR/{{doc.name}}?&amp;width=100&amp;height=100&amp;quiet=0"
+                                 width="150"
+                                 height="150"
+                                 alt="QR Code"/>
+                        </div>
+
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_custom_pdf" model="ir.actions.report">
+        <field name="name">Property Enquiry</field>
+        <field name="model">estate.property</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mycompany_custom.custom_pdf_report</field>
+        <field name="report_file">mycompany_custom.custom_pdf_report</field>
+        <field name="binding_model_id" ref="mycompany_custom.model_estate_property"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

@@ -1,90 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- <template id="estate_property_report_template">
-            <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="doc">
-                    <t t-set="company" t-value="doc.company_id"/>
+    <template id="custom_external_layout_estate"
+              inherit_id="web.external_layout_standard" >
 
-                    <t t-call="web.external_layout">
-                        <div class="page">
-                                <h1>Hello How are you ?</h1>
-                        </div>
-                     </t>
-                </t>
-            </t> -->
+        <xpath expr="//div[contains(@t-attf-class, 'header o_company_')]"
+               position="replace">
+
+            <t t-set="company" t-value="env.company"/>
+
+            <div class="header">
+                <table style="width:100%; border-bottom:1px solid #ddd;">
+                    <tr>
+
+                        <!-- LEFT : COMPANY DETAILS -->
+                        <td style="width:40%; vertical-align:top;">
+                            <strong><t t-esc="company.name"/></strong>
+                            <p style="margin:0;" t-if="company.street">
+                                <t t-esc="company.street"/>
+                            </p>
+                            <p style="margin:0;">
+                                <t t-if="company.city"><t t-esc="company.city"/></t>
+                                <t t-if="company.zip"> - <t t-esc="company.zip"/></t>
+                            </p>
+                            <p style="margin:0;" t-if="company.phone">
+                                Phone: <t t-esc="company.phone"/>
+                            </p>
+                        </td>
+
+                        <!-- CENTER : LOGO -->
+                        <td style="width:20%; text-align:center; vertical-align:top;">
+                            <img t-if="company.logo"
+                                 t-att-src="image_data_uri(company.logo)"
+                                 style="max-height:70px;"
+                                 alt="Logo"/>
+                        </td>
+
+                        <!-- RIGHT : PAGE NUMBER -->
+                        <td style="width:40%; text-align:right; vertical-align:top; font-size:12px;">
+                            <!-- <p style="margin:0;">
+                                Page <span class="page"/> / <span class="topage"/>
+                            </p> -->
+                            <!-- <p><span t-esc="context_timestamp(datetime.datetime.now())"/></p> -->
+
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+
+        </xpath>
+    </template>
+
+ 
     <template id="estate_property_report_template">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
-                <t t-call="mycompany_custom.sub_template_estate_property">
-                    <!-- <div class="page">
-                             <h1>Hello How are you ?</h1>
-                            <t t-set="a" t-value="45545"/>
-                            <div t-out="a"/>
-                            <h1 t-field="doc.name"/>
-                            <h1 t-field="doc.user_id"/>
-                            <div t-field="doc.postcode"/>
-                            <div t-field="doc.expected_price"/>
-                            <div t-field="doc.selling_price"/> -->
-                    <!-- <t t-if="doc.name == 'amarpali'">
-                                <h1>Welcome Amarpali</h1>
-                            </t>
-                            <t t-else="">
-                                <h1>Welcome <span t-field="doc.name"/> Guest</h1>
-                            </t> -->
-                    <!-- <t t-foreach="doc.shared_owner_ids" t-as="char">
-                                <div>
-                                 
-                                    Welcome <span t-field="char.user_id"/>
-                                </div>
-                            </t> 
-                        </div> -->
+
+                <!-- CALL CUSTOM HEADER -->
+                <t t-call="mycompany_custom.custom_external_layout_estate">
+
+                    
+
                 </t>
             </t>
         </t>
     </template>
-    <template id="sub_template_estate_property">
-        <t t-call="web.external_layout">
-            <div class="page">
-                <h1>Sub Template</h1>
-                <h1 t-field="doc.name"/>
-                <!-- 
-                    <t t-foreach="doc.shared_owner_ids" t-as="user">
-                        <div>
-                            <a t-att-href="'mailto:%s' % user.name">
-                                <span t-field="user.name"/>
-                            </a>
-                        </div>
 
-                    </t> -->
-            </div>
-        </t>
-    </template>
-
-
-
-    <record id="estate_model_report_paperformat" model="report.paperformat">
-        <field name="name">Estate Property Report</field>
-        <!-- <field name="format">A4</field> -->
-        <field name="orientation">Portrait</field>
-        <field name="page_height">0</field>
-        <field name="page_width">0</field>
-        <field name="margin_top">10</field>
-        <field name="margin_bottom">10</field>
-        <field name="margin_left">10</field>
-        <field name="margin_right">10</field>
-        
-        <field name="dpi">90</field>
-    </record>
-
-
+   
     <record id="estate_property_report_action" model="ir.actions.report">
-        <field name="name">Property card</field>
+        <field name="name">Property Card</field>
         <field name="model">estate.property</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">mycompany_custom.estate_property_report_template</field>
         <field name="report_file">mycompany_custom.estate_property_report_template</field>
         <field name="binding_model_id" ref="mycompany_custom.model_estate_property"/>
         <field name="binding_type">report</field>
-        <field name="paperformat_id" ref="estate_model_report_paperformat"/>
     </record>
+
 </odoo>

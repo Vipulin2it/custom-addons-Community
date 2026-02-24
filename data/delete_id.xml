@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo >
+    <!-- <delete id="property_vipul" model="estate.property"/>
+     -->
+
+     <delete model="owner" search="[('name','ilike','vipul')]"/>
+</odoo>

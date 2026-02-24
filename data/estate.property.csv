@@ -1,0 +1,5 @@
+id,name,postcode,bedrooms,living_area,owner_id/id
+property_1,Green Villa,302102,3,120.5,owner_6
+property_2,Blue Cottage,302103,2,85.0,owner_6
+property_3,Red House,302104,4,150.0,owner_5
+property_4,Yellow Bungalow,302105,3,110.0,owner_7

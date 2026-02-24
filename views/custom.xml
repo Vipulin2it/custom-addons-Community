@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- <record id="action_customer_stats" model="ir.actions.client">
+        <field name="name">Customer Statistics</field>
+        <field name="tag">CharCounter</field>
+        
+    </record> -->
+
+    <record id="action_customer_stats" model="ir.actions.client">
+        <field name="name">Customer Statistics</field>
+        <field name="tag">Dashboard</field>
+        
+    </record>
+
+
+
+
+
+<menuitem id="menu_custom_view"
+          name="Custom View"
+          parent="menu_estate_root"
+          action="action_customer_stats"/>
+
+
+
+</odoo>
+
+
+   <!-- <record id="action_my_custom" model="ir.actions.client">
+    <field name="name">My Custom Action</field>
+    <field name="tag">xyz</field>
+</record> -->
